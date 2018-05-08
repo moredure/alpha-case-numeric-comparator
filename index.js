@@ -25,9 +25,9 @@ function sort1(first, second) {
 function sort2(first, second) {
   if (isNaN(first) && isNaN(second)) {
     return sort3(first, second);
-  } else if (isNaN(first) && !isNaN(second)) {
+  } else if (isNaN(first) && isNumber(second)) {
     return SET_FIRST_AS_SECOND;
-  } else if (!isNaN(first) && isNaN(second)) {
+  } else if (isNumber(first) && isNaN(second)) {
     return SET_SECOND_AS_FIRST;
   } else {
     return first - second;
@@ -42,9 +42,9 @@ function sort2(first, second) {
  */
 function sort3(first, second) {
   const limit = Math.min(first.length, second.length);
-  for (let position = 0; position < limit; position += 1) {
-    if (first[position] !== second[position]) {
-      return sort5(first[position], second[position]);
+  for (let i = 0; i < limit; i += 1) {
+    if (first[i] !== second[i]) {
+      return sort5(first[i], second[i]);
     }
   }
   return first.length - second.length;
@@ -59,9 +59,9 @@ function sort3(first, second) {
 function sort5(first, second) {
     if (isNaN(first) && isNaN(second)) {
         return sort4(first, second);
-    } else if (!isNaN(first) && isNaN(second)) {
+    } else if (isNumber(first) && isNaN(second)) {
         return SET_SECOND_AS_FIRST;
-    } else if (isNaN(first) && !isNaN(second)) {
+    } else if (isNaN(first) && isNumber(second)) {
         return SET_FIRST_AS_SECOND;
     } else {
         return first - second;
@@ -80,6 +80,15 @@ function sort4(first, second) {
   } else {
     return sort6(first, second);
   }
+}
+
+/**
+ * [isNumber description]
+ * @param  {[type]}  str [description]
+ * @return {Boolean}     [description]
+ */
+function isNumber(str) {
+    return !isNaN(str);
 }
 
 /**
